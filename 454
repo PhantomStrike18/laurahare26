@@ -1,0 +1,29 @@
+from web3 import Web3
+
+# Connect to Ethereum node (use your node provider URL)
+web3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID'))
+
+# Contract address and ABI (example, Aave or Compound staking contract address)
+contract_address = "0xYourContractAddress"
+contract_abi = json.loads('[...]')  # Insert ABI JSON of the staking contract
+
+# Initialize contract instance
+staking_contract = web3.eth.contract(address=contract_address, abi=contract_abi)
+
+def fetch_staking_rewards(account_address):
+    try:
+        # Example: Get staking rewards for an account from the staking contract
+        # Assuming the staking contract has a `getRewards` function
+        rewards = staking_contract.functions.getRewards(account_address).call()
+        
+        print(f"Rewards for account {account_address}: {rewards}")
+    except Exception as e:
+        print(f"Error fetching staking rewards: {e}")
+
+# Main function
+def main():
+    account_address = '0xYourEthereumAddress'
+    fetch_staking_rewards(account_address)
+
+if __name__ == "__main__":
+    main()
